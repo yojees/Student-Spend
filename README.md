@@ -59,19 +59,7 @@ StudentSpend helps answer a simple question:
 
 By tracking expenses and understanding spending habits, students can make smarter financial decisions.
 
----
 
-## 🛠️ Tech Stack
-
-- HTML
-- CSS
-- JavaScript
-- Google AI Studio
-- Vercel
-
-> The exact technologies may vary depending on the current implementation of the project.
-
----
 
 ## 🚀 Getting Started
 
