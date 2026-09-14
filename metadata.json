@@ -1,0 +1,6 @@
+{
+  "name": "StudentSpend",
+  "description": "An intelligent personal finance companion designed specifically for students to track spending, build budgets, and make smarter money decisions.",
+  "requestFramePermissions": ["microphone"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

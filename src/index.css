@@ -1,0 +1,240 @@
+@import "tailwindcss";
+
+:root {
+  --ink: #111111;
+  --muted: #5c5c5c;
+  --card: rgba(248, 248, 246, 0.97);
+  --shell: 1120px;
+  --ease: cubic-bezier(0.16, 1, 0.3, 1);
+  --border-subtle: rgba(17, 17, 17, 0.08);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background: #eef2ee;
+  overflow-x: hidden;
+  font-family: "Poppins", -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  color: var(--ink);
+  scroll-behavior: smooth;
+}
+
+body.menu-open {
+  overflow: hidden;
+}
+
+/* Animations */
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 18px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.animate-rise {
+  animation: rise 0.9s var(--ease) both;
+}
+
+.delay-1 {
+  animation-delay: 0.1s;
+}
+
+.delay-2 {
+  animation-delay: 0.2s;
+}
+
+.delay-3 {
+  animation-delay: 0.3s;
+}
+
+.delay-4 {
+  animation-delay: 0.4s;
+}
+
+/* Hero Shell and Stage */
+.hero {
+  position: relative;
+  height: 100vh;
+  height: 100svh;
+  min-height: 620px;
+  width: 100%;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.hero__inner {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+  min-height: 0;
+}
+
+.stage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 24px;
+  gap: clamp(18px, 2.4vh, 26px);
+  margin: auto;
+  width: 100%;
+  max-width: var(--shell);
+}
+
+/* Hero Badge */
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 14px;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(17, 17, 17, 0.08);
+  font-size: 13px;
+  color: var(--ink);
+  font-weight: 500;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.02);
+}
+
+.badge__tag {
+  background: var(--ink);
+  color: #ffffff;
+  padding: 2px 8px;
+  border-radius: 9999px;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+/* Hero Headline */
+.hero-headline {
+  font-size: clamp(32px, 5.7vw, 72px);
+  line-height: 1.03;
+  font-weight: 500;
+  letter-spacing: -0.035em;
+  color: var(--ink);
+  margin: 0;
+  max-width: 900px;
+}
+
+/* Hero Subcopy */
+.hero-subcopy {
+  font-size: clamp(14px, 1.35vw, 17.5px);
+  line-height: 1.65;
+  font-weight: 400;
+  color: var(--muted);
+  max-width: 680px;
+  margin: 0;
+}
+
+/* Main Interactive Frosted Glass Prompt Card */
+.prompt {
+  width: 100%;
+  max-width: 640px;
+  background: var(--card);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  border-radius: 20px;
+  padding: 16px 18px;
+  box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.06), 0 1px 3px rgba(0, 0, 0, 0.04);
+  transition: box-shadow 0.3s var(--ease), border-color 0.3s var(--ease);
+}
+
+.prompt:focus-within {
+  box-shadow: 0 24px 48px -12px rgba(0, 0, 0, 0.1), 0 2px 6px rgba(0, 0, 0, 0.04);
+  border-color: rgba(17, 17, 17, 0.2);
+}
+
+.prompt__input {
+  width: 100%;
+  background: transparent;
+  border: none;
+  outline: none;
+  font-family: inherit;
+  font-size: 16px;
+  color: var(--ink);
+  resize: none;
+  min-height: 52px;
+  line-height: 1.5;
+}
+
+.prompt__input::placeholder {
+  color: #9a9a9a;
+}
+
+/* Mobile Breakpoints */
+@media (max-width: 640px) {
+  .hero {
+    min-height: 560px;
+  }
+  .hero-headline {
+    font-size: clamp(26px, 7.6vw, 36px);
+  }
+  .hero-subcopy {
+    font-size: 14px;
+    line-height: 1.5;
+  }
+  .prompt__input {
+    font-size: 16px;
+  }
+}
+
+@media (max-height: 560px) and (orientation: landscape) {
+  .hero {
+    height: auto;
+    min-height: 100svh;
+  }
+  .stage {
+    padding-block: 34px;
+  }
+  .prompt__input {
+    min-height: 48px;
+  }
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Custom Scrollbar for sleek appearance */
+::-webkit-scrollbar {
+  width: 7px;
+  height: 7px;
+}
+::-webkit-scrollbar-track {
+  background: #eef2ee;
+}
+::-webkit-scrollbar-thumb {
+  background: #cbd5cb;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #aab5aa;
+}
