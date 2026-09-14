@@ -48,7 +48,7 @@ export const SavingsGoals: React.FC<SavingsGoalsProps> = ({
       title: newTitle.trim(),
       targetAmount: Number(newTarget),
       savedAmount: Number(newSaved) || 0,
-      targetDate: newDate.trim() || 'December 2026',
+      targetDate: newDate.trim() || new Date(Date.now() + 90 * 86400000).toLocaleDateString('en-US', { month: 'long', year: 'numeric' }),
     });
 
     setNewTitle('');

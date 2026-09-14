@@ -6,6 +6,7 @@
 import React, { useState, useEffect } from 'react';
 import { X } from 'lucide-react';
 import { Expense, ExpenseCategory, PaymentMethod } from '../types';
+import { getLocalDateString } from '../utils/dateUtils';
 
 interface ExpenseModalProps {
   isOpen: boolean;
@@ -56,7 +57,7 @@ export const ExpenseModal: React.FC<ExpenseModalProps> = ({
   const [amount, setAmount] = useState('');
   const [description, setDescription] = useState('');
   const [category, setCategory] = useState<ExpenseCategory>('Food');
-  const [date, setDate] = useState(new Date().toISOString().split('T')[0]);
+  const [date, setDate] = useState(() => getLocalDateString());
   const [paymentMethod, setPaymentMethod] = useState<PaymentMethod>('UPI');
 
   useEffect(() => {
@@ -70,7 +71,7 @@ export const ExpenseModal: React.FC<ExpenseModalProps> = ({
       setAmount('');
       setDescription('');
       setCategory('Food');
-      setDate(new Date().toISOString().split('T')[0]);
+      setDate(getLocalDateString());
       setPaymentMethod('UPI');
     }
   }, [editingExpense, isOpen]);

@@ -7,6 +7,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { Plus, Mic, ArrowUp, Check, Edit2, Sparkles, AlertCircle } from 'lucide-react';
 import { Expense, ParsedExpense } from '../types';
 import { parseNaturalLanguageExpense } from '../utils/parser';
+import { getLocalDateString } from '../utils/dateUtils';
 
 interface HeroProps {
   onAddExpense: (expense: Omit<Expense, 'id' | 'createdAt'>) => Expense;
@@ -111,7 +112,7 @@ export const Hero: React.FC<HeroProps> = ({
           amount: data.parsed.amount,
           category: data.parsed.category || 'Other',
           description: data.parsed.description || inputVal.trim(),
-          date: data.parsed.date || new Date().toISOString().split('T')[0],
+          date: data.parsed.date || getLocalDateString(),
         };
       } else {
         parsed = parseNaturalLanguageExpense(inputVal.trim());

@@ -4,6 +4,7 @@
  */
 
 import { ExpenseCategory, ParsedExpense } from '../types';
+import { getLocalDateString } from './dateUtils';
 
 export function parseNaturalLanguageExpense(input: string): ParsedExpense {
   const text = input.trim();
@@ -19,14 +20,14 @@ export function parseNaturalLanguageExpense(input: string): ParsedExpense {
     amount = parseFloat(cleanNum);
   }
 
-  // 2. Extract Date
-  let date = new Date().toISOString().split('T')[0];
+  // 2. Extract Date using user's real local date
+  let date = getLocalDateString(new Date());
   if (lower.includes('yesterday')) {
     const d = new Date(Date.now() - 86400000);
-    date = d.toISOString().split('T')[0];
+    date = getLocalDateString(d);
   } else if (lower.includes('day before yesterday')) {
     const d = new Date(Date.now() - 86400000 * 2);
-    date = d.toISOString().split('T')[0];
+    date = getLocalDateString(d);
   } else {
     // Check day of week (e.g. "last saturday", "saturday")
     const days = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
@@ -35,7 +36,7 @@ export function parseNaturalLanguageExpense(input: string): ParsedExpense {
         const todayDay = new Date().getDay();
         const diff = (todayDay - i + 7) % 7 || 7;
         const target = new Date(Date.now() - diff * 86400000);
-        date = target.toISOString().split('T')[0];
+        date = getLocalDateString(target);
         break;
       }
     }
